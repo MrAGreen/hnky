@@ -14,18 +14,16 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Namer App',
+        title: 'Hnky',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.dark(),
         ),
         home: MyHomePage(),
       ),
     );
   }
 }
-
-// ...
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
@@ -35,7 +33,6 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ↓ Add the code below.
   var favorites = <WordPair>[];
 
   void toggleFavorite() {
@@ -48,14 +45,11 @@ class MyAppState extends ChangeNotifier {
   }
 }
 
-// ...
 
 class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
-// ...
 
 class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
@@ -114,10 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
-// ...
-
-
 class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -140,19 +130,21 @@ class GeneratorPage extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+
+              ElevatedButton(
+                onPressed: () {
+                  appState.getNext();
+                },
+                child: Text('Neigh'),
+              ),
+              SizedBox(width: 20),
+
               ElevatedButton.icon(
                 onPressed: () {
                   appState.toggleFavorite();
                 },
                 icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
+                label: Text('Drop hanky'),
               ),
             ],
           ),
@@ -161,6 +153,7 @@ class GeneratorPage extends StatelessWidget {
     );
   }
 }
+
 class BigCard extends StatelessWidget {
   const BigCard({
     super.key,
@@ -168,8 +161,6 @@ class BigCard extends StatelessWidget {
   });
 
   final WordPair pair;
-
-  // ...
 
   @override
   Widget build(BuildContext context) {
@@ -192,10 +183,7 @@ class BigCard extends StatelessWidget {
       ),
     );
   }
-// ...
 }
-
-// ...
 
 class FavoritesPage extends StatelessWidget {
   @override
